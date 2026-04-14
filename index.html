@@ -503,6 +503,20 @@
       color: var(--purple-700);
     }
 
+    .tag-lang {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 99px;
+      border: 1.5px solid;
+    }
+
+    .tag-lang-es { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+    .tag-lang-en { background: #DBEAFE; color: #1E40AF; border-color: #BFDBFE; }
+    .tag-lang-pt { background: #D1FAE5; color: #065F46; border-color: #A7F3D0; }
+    .tag-lang-fr { background: #EDE9FE; color: #5B21B6; border-color: #DDD6FE; }
+    .tag-lang-default { background: var(--gray-100); color: var(--gray-600); border-color: var(--gray-200); }
+
     /* Card footer */
     .card-footer {
       padding: 12px 20px 16px;
@@ -701,6 +715,13 @@
         </select>
       </div>
 
+      <div class="filter-group">
+        <label for="filter-lang">Idioma</label>
+        <select id="filter-lang">
+          <option value="">Todos los idiomas</option>
+        </select>
+      </div>
+
       <button class="btn-reset" id="btn-reset">Limpiar filtros</button>
 
       <div class="filter-count" id="filter-count"></div>
@@ -762,6 +783,8 @@
   let allData = { benchmarks: [], spotlights: [] };
   let activeTab = 'benchmarks';
 
+  const LANG_FLAG = { ES: '🇦🇷', EN: '🇺🇸', PT: '🇧🇷', FR: '🇫🇷' };
+
   // ── Fetch data ────────────────────────────────────────────────────────
   async function loadData() {
     try {
@@ -796,8 +819,9 @@
   function populateFilters() {
     const all = [...allData.benchmarks, ...allData.spotlights];
 
-    const modules = [...new Set(all.map(f => f.modulo_display))].sort();
+    const modules    = [...new Set(all.map(f => f.modulo_display))].sort();
     const industries = [...new Set(all.map(f => f.industria_display))].sort();
+    const langs      = [...new Set(all.map(f => f.idioma_display).filter(Boolean))].sort();
 
     const modSel = document.getElementById('filter-module');
     modules.forEach(m => {
@@ -812,6 +836,13 @@
       opt.value = i; opt.textContent = i;
       indSel.appendChild(opt);
     });
+
+    const langSel = document.getElementById('filter-lang');
+    langs.forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l; opt.textContent = l;
+      langSel.appendChild(opt);
+    });
   }
 
   // ── Filter logic ──────────────────────────────────────────────────────
@@ -820,16 +851,18 @@
       search:   document.getElementById('search-input').value.trim().toLowerCase(),
       module:   document.getElementById('filter-module').value,
       industry: document.getElementById('filter-industry').value,
+      lang:     document.getElementById('filter-lang').value,
     };
   }
 
   function applyFilters(items) {
-    const { search, module, industry } = getFilters();
+    const { search, module, industry, lang } = getFilters();
     return items.filter(item => {
       if (search && !item.cliente.toLowerCase().includes(search) &&
           !item.modulo_display.toLowerCase().includes(search)) return false;
       if (module && item.modulo_display !== module) return false;
       if (industry && item.industria_display !== industry) return false;
+      if (lang && item.idioma_display !== lang) return false;
       return true;
     });
   }
@@ -877,6 +910,7 @@
           <div class="card-tags">
             <span class="tag tag-industry">${item.industria_display}</span>
             <span class="tag tag-module">${item.modulo_display}</span>
+            ${item.idioma_display ? `<span class="tag tag-lang tag-lang-${(item.idioma_code||'').toLowerCase()}" title="${item.idioma_display}">${LANG_FLAG[item.idioma_code] || ''} ${item.idioma_display}</span>` : ''}
           </div>
         </div>
         <div class="card-footer">
@@ -911,7 +945,7 @@
 
     // Filter count label
     const total = filteredBM.length + filteredCS.length;
-    const hasFilters = search || module || industry;
+    const hasFilters = search || module || industry || lang;
     document.getElementById('filter-count').innerHTML = hasFilters
       ? `<strong>${total}</strong> resultado${total !== 1 ? 's' : ''}`
       : '';
@@ -930,7 +964,7 @@
   });
 
   // ── Filter events ─────────────────────────────────────────────────────
-  ['search-input', 'filter-module', 'filter-industry'].forEach(id => {
+  ['search-input', 'filter-module', 'filter-industry', 'filter-lang'].forEach(id => {
     document.getElementById(id).addEventListener('input', render);
     document.getElementById(id).addEventListener('change', render);
   });
@@ -939,6 +973,7 @@
     document.getElementById('search-input').value = '';
     document.getElementById('filter-module').value = '';
     document.getElementById('filter-industry').value = '';
+    document.getElementById('filter-lang').value = '';
     render();
   });
 
