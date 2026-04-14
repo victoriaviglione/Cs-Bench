@@ -803,6 +803,7 @@
       ce_soon_title:"Próximamente",
       ce_soon_body: "Los Casos de Éxito estarán disponibles pronto.",
       btn_view: "Ver",
+      bm_guide: "Guía de buenas prácticas",
       lb_open: "Ver en Drive",
       lb_download: "Descargar",
     },
@@ -825,6 +826,7 @@
       ce_soon_title:"Coming soon",
       ce_soon_body: "Success Stories will be available shortly.",
       btn_view: "View",
+      bm_guide: "Best practices guide",
       lb_open: "Open in Drive",
       lb_download: "Download",
     },
@@ -847,6 +849,7 @@
       ce_soon_title:"Em breve",
       ce_soon_body: "Os Casos de Sucesso estarão disponíveis em breve.",
       btn_view: "Ver",
+      bm_guide: "Guia de boas práticas",
       lb_open: "Ver no Drive",
       lb_download: "Baixar",
     }
@@ -949,13 +952,27 @@
     const div = document.createElement('div');
     div.className = 'card';
 
-    const indCode   = item.industria_code || '';
-    const color     = indColor(indCode);
-    const client    = item.cliente || (item.display_name||'').split('—')[0].trim() || '—';
-    const modLabel  = mod(item.modulo_code);
-    const indLabel  = ind(indCode);
-    const tipo      = item.tipo || 'CS';
-    const isSlide   = isSlides(item.extension);
+    const tipo     = item.tipo || 'CS';
+    const isBM     = tipo === 'BM';
+    const indCode  = item.industria_code || '';
+    const color    = isBM ? '#182D7A' : indColor(indCode);
+    const modLabel = mod(item.modulo_code);
+    const isSlide  = isSlides(item.extension);
+
+    // CS/CE: show client name as title, module as subtitle
+    // BM: show module as title, optional descriptor as subtitle
+    const title    = isBM
+      ? modLabel
+      : (item.cliente || (item.display_name||'').split('—')[0].trim() || '—');
+    const subtitle = isBM
+      ? (item.cliente && item.cliente !== modLabel ? item.cliente : t('bm_guide'))
+      : modLabel + (isSlide ? ' · Slides' : '');
+
+    // Tags: BM shows only language (no industry); CS/CE shows industry + language
+    const tagsHtml = isBM
+      ? `<span class="tag tag-lang">${item.idioma_code||'ES'}</span>`
+      : `<span class="tag tag-industry" style="background:${indColor(indCode)}">${ind(indCode)}</span>
+         <span class="tag tag-lang">${item.idioma_code||'ES'}</span>`;
 
     div.innerHTML = `
       <div class="card-accent" style="background:${color}"></div>
@@ -965,12 +982,9 @@
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </button>
       </div>
-      <div class="card-client">${client}</div>
-      <div class="card-module">${modLabel}${isSlide ? ' · Slides' : ''}</div>
-      <div class="card-tags">
-        <span class="tag tag-industry" style="background:${color}">${indLabel}</span>
-        <span class="tag tag-lang">${item.idioma_code||'ES'}</span>
-      </div>
+      <div class="card-client">${title}</div>
+      <div class="card-module">${subtitle}</div>
+      <div class="card-tags">${tagsHtml}</div>
       <div class="card-footer">
         <button class="card-btn-view" data-action="view">
           <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
