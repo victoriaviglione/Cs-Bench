@@ -1,0 +1,17 @@
+# Google API credentials — NEVER commit this
+credentials.json
+*.json.bak
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/

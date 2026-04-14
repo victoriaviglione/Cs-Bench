@@ -1,0 +1,73 @@
+{
+  "last_updated": "2026-04-14T00:00:00+00:00",
+  "total_benchmarks": 2,
+  "total_spotlights": 2,
+  "benchmarks": [
+    {
+      "id": "example_id_1",
+      "filename": "BM_COMUNICACIONES_NaranjaX_FINANZAS.pdf",
+      "display_name": "NaranjaX — Comunicaciones",
+      "tipo": "BM",
+      "modulo_code": "COMUNICACIONES",
+      "modulo_display": "Comunicaciones",
+      "cliente": "NaranjaX",
+      "industria_code": "FINANZAS",
+      "industria_display": "Financial Services",
+      "extension": "pdf",
+      "modified": "2026-04-01T10:00:00.000Z",
+      "view_url": "#",
+      "download_url": "#",
+      "thumbnail_url": ""
+    },
+    {
+      "id": "example_id_2",
+      "filename": "BM_ENCUESTAS_Farmacity_RETAIL.pdf",
+      "display_name": "Farmacity — Encuestas",
+      "tipo": "BM",
+      "modulo_code": "ENCUESTAS",
+      "modulo_display": "Encuestas",
+      "cliente": "Farmacity",
+      "industria_code": "RETAIL",
+      "industria_display": "Retail",
+      "extension": "pdf",
+      "modified": "2026-04-03T09:00:00.000Z",
+      "view_url": "#",
+      "download_url": "#",
+      "thumbnail_url": ""
+    }
+  ],
+  "spotlights": [
+    {
+      "id": "example_id_3",
+      "filename": "CS_ONBOARDING_Globant_SOFTWARE.png",
+      "display_name": "Globant — Onboarding",
+      "tipo": "CS",
+      "modulo_code": "ONBOARDING",
+      "modulo_display": "Onboarding",
+      "cliente": "Globant",
+      "industria_code": "SOFTWARE",
+      "industria_display": "Software Companies & IT Services",
+      "extension": "png",
+      "modified": "2026-04-05T14:00:00.000Z",
+      "view_url": "#",
+      "download_url": "#",
+      "thumbnail_url": ""
+    },
+    {
+      "id": "example_id_4",
+      "filename": "CS_RECONOCIMIENTOS_Arcor_MANUFACTURING.png",
+      "display_name": "Arcor — Reconocimientos",
+      "tipo": "CS",
+      "modulo_code": "RECONOCIMIENTOS",
+      "modulo_display": "Reconocimientos",
+      "cliente": "Arcor",
+      "industria_code": "MANUFACTURING",
+      "industria_display": "Manufacturing",
+      "extension": "png",
+      "modified": "2026-04-07T11:00:00.000Z",
+      "view_url": "#",
+      "download_url": "#",
+      "thumbnail_url": ""
+    }
+  ]
+}

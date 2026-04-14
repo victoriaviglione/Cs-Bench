@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Humand — Repositorio CS & Benchmarks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Variables ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-900: #2D1B69;
+      --purple-800: #3D2785;
+      --purple-700: #4C32A0;
+      --purple-600: #5B3EBB;
+      --purple-500: #6B4FD0;
+      --purple-400: #8B72E0;
+      --purple-300: #B09AEE;
+      --purple-100: #EDE9FB;
+      --purple-50:  #F5F3FD;
+
+      --orange-500: #FF6B35;
+      --orange-400: #FF8559;
+
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6B7280;
+      --gray-400: #9CA3AF;
+      --gray-200: #E5E7EB;
+      --gray-100: #F3F4F6;
+      --gray-50:  #F9FAFB;
+      --white:    #FFFFFF;
+
+      --radius-sm: 6px;
+      --radius:    10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow:    0 4px 12px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+      --shadow-lg: 0 12px 28px rgba(0,0,0,.10), 0 6px 12px rgba(0,0,0,.06);
+
+      --transition: 0.18s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--purple-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────── */
+    .header {
+      background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 55%, var(--purple-500) 100%);
+      padding: 28px 48px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.04);
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 30%;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.03);
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-icon {
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,.15);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.2);
+    }
+
+    .logo-icon svg { width: 28px; height: 28px; fill: white; }
+
+    .logo-text h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text p {
+      font-size: 13px;
+      color: rgba(255,255,255,.65);
+      margin-top: 2px;
+    }
+
+    .header-stats {
+      display: flex;
+      gap: 12px;
+    }
+
+    .stat-pill {
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 99px;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-pill .num {
+      font-size: 20px;
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+    }
+
+    .stat-pill .label {
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+      line-height: 1.3;
+    }
+
+    .last-updated {
+      font-size: 11px;
+      color: rgba(255,255,255,.45);
+      margin-top: 16px;
+      text-align: right;
+    }
+
+    /* ── Main layout ──────────────────────────────────────────────────── */
+    .main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 48px 80px;
+    }
+
+    /* ── Filter bar ───────────────────────────────────────────────────── */
+    .filters-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 36px;
+      border: 1px solid var(--gray-200);
+    }
+
+    .filters-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 16px;
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .filter-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .filter-group select,
+    .filter-group input {
+      height: 40px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 0 12px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .filter-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+      border-color: var(--purple-500);
+      box-shadow: 0 0 0 3px rgba(107, 79, 208, .12);
+      background: white;
+    }
+
+    .search-group { flex: 2; min-width: 220px; }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+
+    .search-wrapper input {
+      padding-left: 36px;
+      width: 100%;
+    }
+
+    .btn-reset {
+      height: 40px;
+      padding: 0 20px;
+      background: var(--gray-100);
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      cursor: pointer;
+      transition: background var(--transition);
+      font-family: inherit;
+      white-space: nowrap;
+      align-self: flex-end;
+    }
+
+    .btn-reset:hover { background: var(--gray-200); }
+
+    .filter-count {
+      align-self: flex-end;
+      padding-bottom: 10px;
+      font-size: 13px;
+      color: var(--gray-500);
+      white-space: nowrap;
+    }
+
+    .filter-count strong { color: var(--purple-600); }
+
+    /* ── Tabs ────────────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 5px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      width: fit-content;
+    }
+
+    .tab-btn {
+      padding: 10px 24px;
+      border-radius: var(--radius-lg);
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-500);
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover { color: var(--purple-600); background: var(--purple-50); }
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
+      color: white;
+      box-shadow: 0 2px 8px rgba(107, 79, 208, .3);
+    }
+
+    .tab-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.25);
+      line-height: 1.4;
+    }
+
+    .tab-btn:not(.active) .tab-badge {
+      background: var(--purple-100);
+      color: var(--purple-600);
+    }
+
+    /* ── Section header ──────────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gray-900);
+      letter-spacing: -0.3px;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gray-500);
+    }
+
+    /* ── Grid ────────────────────────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── Card ────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Card thumbnail */
+    .card-thumb {
+      position: relative;
+      height: 160px;
+      background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-50) 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-thumb .thumb-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-thumb .thumb-placeholder svg {
+      width: 40px;
+      height: 40px;
+      opacity: .4;
+      color: var(--purple-500);
+    }
+
+    .card-thumb .thumb-placeholder span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple-400);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .type-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .type-badge.bm {
+      background: var(--purple-600);
+      color: white;
+    }
+
+    .type-badge.cs {
+      background: var(--orange-500);
+      color: white;
+    }
+
+    .ext-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.9);
+      color: var(--gray-700);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 18px 20px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-client {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.2;
+    }
+
+    .card-module {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--purple-600);
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+
+    .tag-industry {
+      background: var(--gray-100);
+      color: var(--gray-700);
+      border: 1px solid var(--gray-200);
+    }
+
+    .tag-module {
+      background: var(--purple-100);
+      color: var(--purple-700);
+    }
+
+    /* Card footer */
+    .card-footer {
+      padding: 12px 20px 16px;
+      border-top: 1px solid var(--gray-100);
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-dl {
+      flex: 1;
+      height: 36px;
+      border-radius: var(--radius);
+      border: 1.5px solid transparent;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-dl-primary {
+      background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
+      color: white;
+      box-shadow: 0 2px 6px rgba(107, 79, 208, .25);
+    }
+
+    .btn-dl-primary:hover {
+      box-shadow: 0 4px 12px rgba(107, 79, 208, .35);
+      transform: translateY(-1px);
+    }
+
+    .btn-dl-secondary {
+      background: white;
+      border-color: var(--gray-200);
+      color: var(--gray-700);
+    }
+
+    .btn-dl-secondary:hover {
+      border-color: var(--purple-300);
+      color: var(--purple-600);
+      background: var(--purple-50);
+    }
+
+    .btn-view {
+      flex: 0 0 36px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--gray-200);
+      background: white;
+      color: var(--gray-500);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .btn-view:hover {
+      border-color: var(--purple-300);
+      color: var(--purple-600);
+      background: var(--purple-50);
+    }
+
+    /* ── Empty state ──────────────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--gray-400);
+    }
+
+    .empty-state svg { width: 56px; height: 56px; margin-bottom: 16px; opacity: .5; }
+    .empty-state h3 { font-size: 17px; font-weight: 700; color: var(--gray-500); }
+    .empty-state p  { font-size: 14px; margin-top: 6px; }
+
+    /* ── Section panel ────────────────────────────────────────────────── */
+    .section-panel { display: none; }
+    .section-panel.active { display: block; }
+
+    /* ── Footer ───────────────────────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      font-size: 12px;
+      color: var(--gray-400);
+      border-top: 1px solid var(--gray-200);
+    }
+
+    /* ── Loading ─────────────────────────────────────────────────────── */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,.85);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      gap: 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--purple-100);
+      border-top-color: var(--purple-500);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Responsive ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .header { padding: 20px 24px 24px; }
+      .header-stats { display: none; }
+      .main { padding: 24px 20px 60px; }
+      .filters-row { flex-direction: column; }
+      .filter-group { min-width: 100%; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .tabs { width: 100%; }
+      .tab-btn { flex: 1; justify-content: center; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <span style="font-size:14px;color:var(--gray-500);font-weight:600;">Cargando repositorio…</span>
+</div>
+
+<!-- ── Header ──────────────────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+      </div>
+      <div class="logo-text">
+        <h1>Humand — Repositorio</h1>
+        <p>Customer Spotlights &amp; Benchmarks · Para SAMs</p>
+      </div>
+    </div>
+    <div>
+      <div class="header-stats">
+        <div class="stat-pill">
+          <span class="num" id="stat-bm">0</span>
+          <span class="label">Bench-<br>marks</span>
+        </div>
+        <div class="stat-pill">
+          <span class="num" id="stat-cs">0</span>
+          <span class="label">Customer<br>Spotlights</span>
+        </div>
+      </div>
+      <div class="last-updated" id="last-updated">Última actualización: —</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Main ────────────────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- Filter bar -->
+  <div class="filters-card">
+    <div class="filters-title">Filtros</div>
+    <div class="filters-row">
+
+      <div class="filter-group search-group">
+        <label for="search-input">Buscar cliente</label>
+        <div class="search-wrapper">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Ej: Naranja, Farmacity…" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-module">Módulo</label>
+        <select id="filter-module">
+          <option value="">Todos los módulos</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="filter-industry">Industria</label>
+        <select id="filter-industry">
+          <option value="">Todas las industrias</option>
+        </select>
+      </div>
+
+      <button class="btn-reset" id="btn-reset">Limpiar filtros</button>
+
+      <div class="filter-count" id="filter-count"></div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="benchmarks">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Benchmarks
+      <span class="tab-badge" id="badge-bm">0</span>
+    </button>
+    <button class="tab-btn" data-tab="spotlights">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Customer Spotlights
+      <span class="tab-badge" id="badge-cs">0</span>
+    </button>
+  </div>
+
+  <!-- Benchmarks section -->
+  <div class="section-panel active" id="panel-benchmarks">
+    <div class="section-header">
+      <h2 class="section-title">Benchmarks</h2>
+      <span class="section-subtitle">Comparativas de uso y adopción por módulo</span>
+    </div>
+    <div class="cards-grid" id="grid-benchmarks"></div>
+    <div class="empty-state" id="empty-benchmarks" style="display:none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h3>Sin resultados</h3>
+      <p>No hay benchmarks que coincidan con los filtros seleccionados.</p>
+    </div>
+  </div>
+
+  <!-- Spotlights section -->
+  <div class="section-panel" id="panel-spotlights">
+    <div class="section-header">
+      <h2 class="section-title">Customer Spotlights</h2>
+      <span class="section-subtitle">Casos de éxito y resultados destacados</span>
+    </div>
+    <div class="cards-grid" id="grid-spotlights"></div>
+    <div class="empty-state" id="empty-spotlights" style="display:none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h3>Sin resultados</h3>
+      <p>No hay customer spotlights que coincidan con los filtros seleccionados.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  Humand &copy; <span id="footer-year"></span> · Repositorio interno para SAMs · Actualización automática diaria
+</footer>
+
+<!-- ── JavaScript ──────────────────────────────────────────────────────── -->
+<script>
+  const DATA_URL = 'data.json';
+
+  let allData = { benchmarks: [], spotlights: [] };
+  let activeTab = 'benchmarks';
+
+  // ── Fetch data ────────────────────────────────────────────────────────
+  async function loadData() {
+    try {
+      const res = await fetch(DATA_URL + '?t=' + Date.now());
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      allData = await res.json();
+
+      document.getElementById('stat-bm').textContent = allData.total_benchmarks ?? allData.benchmarks.length;
+      document.getElementById('stat-cs').textContent = allData.total_spotlights ?? allData.spotlights.length;
+      document.getElementById('badge-bm').textContent = allData.benchmarks.length;
+      document.getElementById('badge-cs').textContent = allData.spotlights.length;
+
+      if (allData.last_updated) {
+        const d = new Date(allData.last_updated);
+        document.getElementById('last-updated').textContent =
+          'Última actualización: ' + d.toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+      }
+
+      populateFilters();
+      render();
+
+    } catch (e) {
+      console.error('Error loading data.json:', e);
+      document.getElementById('grid-benchmarks').innerHTML =
+        '<div class="empty-state" style="grid-column:1/-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Error al cargar los datos</h3><p>Verificá que data.json esté presente y sea válido.</p></div>';
+    } finally {
+      document.getElementById('loading').style.display = 'none';
+    }
+  }
+
+  // ── Populate filter dropdowns ─────────────────────────────────────────
+  function populateFilters() {
+    const all = [...allData.benchmarks, ...allData.spotlights];
+
+    const modules = [...new Set(all.map(f => f.modulo_display))].sort();
+    const industries = [...new Set(all.map(f => f.industria_display))].sort();
+
+    const modSel = document.getElementById('filter-module');
+    modules.forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m; opt.textContent = m;
+      modSel.appendChild(opt);
+    });
+
+    const indSel = document.getElementById('filter-industry');
+    industries.forEach(i => {
+      const opt = document.createElement('option');
+      opt.value = i; opt.textContent = i;
+      indSel.appendChild(opt);
+    });
+  }
+
+  // ── Filter logic ──────────────────────────────────────────────────────
+  function getFilters() {
+    return {
+      search:   document.getElementById('search-input').value.trim().toLowerCase(),
+      module:   document.getElementById('filter-module').value,
+      industry: document.getElementById('filter-industry').value,
+    };
+  }
+
+  function applyFilters(items) {
+    const { search, module, industry } = getFilters();
+    return items.filter(item => {
+      if (search && !item.cliente.toLowerCase().includes(search) &&
+          !item.modulo_display.toLowerCase().includes(search)) return false;
+      if (module && item.modulo_display !== module) return false;
+      if (industry && item.industria_display !== industry) return false;
+      return true;
+    });
+  }
+
+  // ── Render cards ──────────────────────────────────────────────────────
+  function cardHTML(item) {
+    const isBM = item.tipo === 'BM';
+    const typeCls = isBM ? 'bm' : 'cs';
+    const typeLabel = isBM ? 'Benchmark' : 'Spotlight';
+    const hasThumb = item.thumbnail_url && item.thumbnail_url !== '';
+    const isPDF = item.extension === 'pdf';
+    const isPNG = item.extension === 'png' || item.extension === 'jpg' || item.extension === 'jpeg';
+
+    const thumbContent = hasThumb
+      ? `<img src="${item.thumbnail_url}" alt="${item.display_name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="thumb-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>${item.extension.toUpperCase()}</span></div>`
+      : `<div class="thumb-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>${item.extension.toUpperCase()}</span></div>`;
+
+    // Build download buttons based on available format
+    let dlButtons = '';
+    if (item.download_url && item.download_url !== '#') {
+      // Primary download: native format
+      dlButtons += `<a class="btn-dl btn-dl-primary" href="${item.download_url}" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Descargar ${item.extension.toUpperCase()}
+      </a>`;
+    }
+
+    // View in Drive button
+    const viewBtn = item.view_url && item.view_url !== '#'
+      ? `<a class="btn-view" href="${item.view_url}" target="_blank" rel="noopener" title="Ver en Drive">
+           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+         </a>`
+      : '';
+
+    return `
+      <div class="card" data-module="${item.modulo_display}" data-industry="${item.industria_display}" data-client="${item.cliente}">
+        <div class="card-thumb">
+          ${thumbContent}
+          <span class="type-badge ${typeCls}">${typeLabel}</span>
+          <span class="ext-badge">${item.extension.toUpperCase()}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-client">${item.cliente}</div>
+          <div class="card-module">${item.modulo_display}</div>
+          <div class="card-tags">
+            <span class="tag tag-industry">${item.industria_display}</span>
+            <span class="tag tag-module">${item.modulo_display}</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          ${dlButtons}
+          ${viewBtn}
+        </div>
+      </div>
+    `;
+  }
+
+  function render() {
+    const { search, module, industry } = getFilters();
+
+    const filteredBM = applyFilters(allData.benchmarks);
+    const filteredCS = applyFilters(allData.spotlights);
+
+    // Benchmarks
+    const gridBM = document.getElementById('grid-benchmarks');
+    const emptyBM = document.getElementById('empty-benchmarks');
+    gridBM.innerHTML = filteredBM.map(cardHTML).join('');
+    emptyBM.style.display = filteredBM.length === 0 ? 'block' : 'none';
+
+    // Spotlights
+    const gridCS = document.getElementById('grid-spotlights');
+    const emptyCS = document.getElementById('empty-spotlights');
+    gridCS.innerHTML = filteredCS.map(cardHTML).join('');
+    emptyCS.style.display = filteredCS.length === 0 ? 'block' : 'none';
+
+    // Update badges with filtered counts
+    document.getElementById('badge-bm').textContent = filteredBM.length;
+    document.getElementById('badge-cs').textContent = filteredCS.length;
+
+    // Filter count label
+    const total = filteredBM.length + filteredCS.length;
+    const hasFilters = search || module || industry;
+    document.getElementById('filter-count').innerHTML = hasFilters
+      ? `<strong>${total}</strong> resultado${total !== 1 ? 's' : ''}`
+      : '';
+  }
+
+  // ── Tabs ──────────────────────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      activeTab = tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab).classList.add('active');
+    });
+  });
+
+  // ── Filter events ─────────────────────────────────────────────────────
+  ['search-input', 'filter-module', 'filter-industry'].forEach(id => {
+    document.getElementById(id).addEventListener('input', render);
+    document.getElementById(id).addEventListener('change', render);
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    document.getElementById('search-input').value = '';
+    document.getElementById('filter-module').value = '';
+    document.getElementById('filter-industry').value = '';
+    render();
+  });
+
+  // ── Footer year ───────────────────────────────────────────────────────
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // ── Init ──────────────────────────────────────────────────────────────
+  loadData();
+</script>
+</body>
+</html>
