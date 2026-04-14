@@ -3,985 +3,1188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Humand — Repositorio CS & Benchmarks</title>
+  <title>Humand — Success Stories Repository</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style>
     /* ── Reset & Variables ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --purple-900: #2D1B69;
-      --purple-800: #3D2785;
-      --purple-700: #4C32A0;
-      --purple-600: #5B3EBB;
-      --purple-500: #6B4FD0;
-      --purple-400: #8B72E0;
-      --purple-300: #B09AEE;
-      --purple-100: #EDE9FB;
-      --purple-50:  #F5F3FD;
+      --blue-900:  #0F1F54;
+      --blue-800:  #182D7A;
+      --blue-600:  #2440A8;
+      --blue-500:  #496BE3;
+      --blue-400:  #6D8FEF;
+      --blue-100:  #D6E0FA;
+      --blue-50:   #EEF2FD;
 
-      --orange-500: #FF6B35;
-      --orange-400: #FF8559;
+      --cream:     #F8F4ED;
+      --cream-dark:#EDE8DF;
 
-      --gray-900: #111827;
-      --gray-700: #374151;
-      --gray-500: #6B7280;
-      --gray-400: #9CA3AF;
-      --gray-200: #E5E7EB;
-      --gray-100: #F3F4F6;
-      --gray-50:  #F9FAFB;
-      --white:    #FFFFFF;
+      --gray-900:  #111827;
+      --gray-700:  #374151;
+      --gray-600:  #4B5563;
+      --gray-500:  #6B7280;
+      --gray-400:  #9CA3AF;
+      --gray-300:  #D1D5DB;
+      --gray-200:  #E5E7EB;
+      --gray-100:  #F3F4F6;
+      --white:     #FFFFFF;
 
       --radius-sm: 6px;
       --radius:    10px;
       --radius-lg: 16px;
       --radius-xl: 24px;
 
-      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
-      --shadow:    0 4px 12px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
-      --shadow-lg: 0 12px 28px rgba(0,0,0,.10), 0 6px 12px rgba(0,0,0,.06);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --shadow:     0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+      --shadow-lg:  0 20px 48px rgba(0,0,0,.14), 0 8px 16px rgba(0,0,0,.07);
+      --shadow-card:0 2px 8px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.04);
 
-      --transition: 0.18s ease;
+      --transition: 0.16s ease;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--purple-50);
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
       color: var(--gray-900);
       min-height: 100vh;
     }
 
+    /* ── Industry Colors ────────────────────────────────────────────────── */
+    /* Used for card accent bars and tags */
+    :root {
+      --c-retail:          #E84393;
+      --c-manufacturing:   #F57C00;
+      --c-pharma:          #7B1FA2;
+      --c-pharmaceuticals: #7B1FA2;
+      --c-transport:       #0277BD;
+      --c-transportation:  #0277BD;
+      --c-logistics:       #00796B;
+      --c-agriculture:     #388E3C;
+      --c-healthcare:      #C62828;
+      --c-automotive:      #455A64;
+      --c-financialservices:#1565C0;
+      --c-consumer:        #EF6C00;
+      --c-consumergoods:   #EF6C00;
+      --c-construction:    #6D4C41;
+      --c-food:            #2E7D32;
+      --c-foodservices:    #2E7D32;
+      --c-consultingservices:#4527A0;
+      --c-oilenergy:       #F9A825;
+      --c-energy:          #F9A825;
+      --c-default:         #496BE3;
+    }
+
     /* ── Header ─────────────────────────────────────────────────────────── */
     .header {
-      background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 55%, var(--purple-500) 100%);
-      padding: 28px 48px 32px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.04);
-    }
-
-    .header::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: 30%;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.03);
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
     }
 
     .header-inner {
-      max-width: 1280px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
-      position: relative;
-      z-index: 1;
+      height: 60px;
+      gap: 20px;
     }
 
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
+      flex-shrink: 0;
     }
 
-    .logo-icon {
-      width: 48px; height: 48px;
-      background: rgba(255,255,255,.15);
-      border-radius: var(--radius-lg);
+    /* Inline SVG logo scales with CSS */
+    .logo-svg {
+      height: 22px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--gray-200);
+    }
+
+    .header-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-500);
+      letter-spacing: .1px;
+    }
+
+    /* Language switcher */
+    .lang-switcher {
       display: flex;
       align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,.2);
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 3px;
+      flex-shrink: 0;
     }
 
-    .logo-icon svg { width: 28px; height: 28px; fill: white; }
-
-    .logo-text h1 {
-      font-size: 22px;
-      font-weight: 800;
-      color: white;
-      letter-spacing: -0.3px;
+    .lang-btn {
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-500);
+      cursor: pointer;
+      transition: all var(--transition);
+      letter-spacing: .4px;
     }
 
-    .logo-text p {
+    .lang-btn:hover { color: var(--gray-900); }
+
+    .lang-btn.active {
+      background: var(--white);
+      color: var(--blue-800);
+      box-shadow: 0 1px 4px rgba(0,0,0,.10);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(130deg, var(--blue-900) 0%, var(--blue-800) 55%, #1e3a9e 100%);
+      padding: 36px 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -60px;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: rgba(255,255,255,.03); pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text {
+      margin-bottom: 28px;
+    }
+
+    .hero-text h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 5px;
+      letter-spacing: -.2px;
+    }
+
+    .hero-text p {
       font-size: 13px;
-      color: rgba(255,255,255,.65);
-      margin-top: 2px;
+      color: rgba(255,255,255,.55);
+      font-weight: 300;
     }
 
-    .header-stats {
+    /* ── Section Tabs ───────────────────────────────────────────────────── */
+    .tabs {
       display: flex;
-      gap: 12px;
+      gap: 0;
     }
 
-    .stat-pill {
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 99px;
-      padding: 8px 16px;
+    .tab-btn {
       display: flex;
       align-items: center;
       gap: 8px;
-      backdrop-filter: blur(8px);
-    }
-
-    .stat-pill .num {
-      font-size: 20px;
-      font-weight: 800;
-      color: white;
-      line-height: 1;
-    }
-
-    .stat-pill .label {
-      font-size: 12px;
-      color: rgba(255,255,255,.7);
-      line-height: 1.3;
-    }
-
-    .last-updated {
-      font-size: 11px;
-      color: rgba(255,255,255,.45);
-      margin-top: 16px;
-      text-align: right;
-    }
-
-    /* ── Main layout ──────────────────────────────────────────────────── */
-    .main {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 40px 48px 80px;
-    }
-
-    /* ── Filter bar ───────────────────────────────────────────────────── */
-    .filters-card {
-      background: var(--white);
-      border-radius: var(--radius-xl);
-      padding: 24px 28px;
-      box-shadow: var(--shadow);
-      margin-bottom: 36px;
-      border: 1px solid var(--gray-200);
-    }
-
-    .filters-title {
+      padding: 13px 22px 15px;
+      border: none;
+      background: transparent;
+      font-family: inherit;
       font-size: 13px;
-      font-weight: 600;
-      color: var(--gray-500);
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      margin-bottom: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,.5);
+      cursor: pointer;
+      transition: all var(--transition);
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
     }
 
-    .filters-row {
+    .tab-btn:hover { color: rgba(255,255,255,.82); }
+
+    .tab-btn.active {
+      color: var(--white);
+      border-bottom-color: var(--blue-500);
+    }
+
+    .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 19px;
+      height: 19px;
+      padding: 0 5px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.12);
+      font-size: 10px;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+    }
+
+    .tab-btn.active .tab-badge {
+      background: var(--blue-500);
+      color: var(--white);
+    }
+
+    /* ── Toolbar ────────────────────────────────────────────────────────── */
+    .toolbar-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 10px 48px;
+    }
+
+    .toolbar {
+      max-width: 1320px;
+      margin: 0 auto;
       display: flex;
-      gap: 14px;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
-      align-items: flex-end;
     }
 
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    .search-wrap {
+      position: relative;
       flex: 1;
       min-width: 180px;
+      max-width: 320px;
     }
 
-    .filter-group label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray-700);
-    }
-
-    .filter-group select,
-    .filter-group input {
-      height: 40px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius);
-      padding: 0 12px;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--gray-900);
-      background: var(--gray-50);
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      -webkit-appearance: none;
-      appearance: none;
-      cursor: pointer;
-    }
-
-    .filter-group select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 32px;
-    }
-
-    .filter-group select:focus,
-    .filter-group input:focus {
-      border-color: var(--purple-500);
-      box-shadow: 0 0 0 3px rgba(107, 79, 208, .12);
-      background: white;
-    }
-
-    .search-group { flex: 2; min-width: 220px; }
-
-    .search-wrapper {
-      position: relative;
-    }
-
-    .search-icon {
+    .search-wrap svg {
       position: absolute;
-      left: 12px;
+      left: 11px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--gray-400);
       pointer-events: none;
+      flex-shrink: 0;
     }
 
-    .search-wrapper input {
-      padding-left: 36px;
+    .search-input {
       width: 100%;
-    }
-
-    .btn-reset {
-      height: 40px;
-      padding: 0 20px;
-      background: var(--gray-100);
+      padding: 8px 12px 8px 34px;
       border: 1.5px solid var(--gray-200);
       border-radius: var(--radius);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gray-700);
-      cursor: pointer;
-      transition: background var(--transition);
       font-family: inherit;
-      white-space: nowrap;
-      align-self: flex-end;
-    }
-
-    .btn-reset:hover { background: var(--gray-200); }
-
-    .filter-count {
-      align-self: flex-end;
-      padding-bottom: 10px;
       font-size: 13px;
-      color: var(--gray-500);
-      white-space: nowrap;
+      color: var(--gray-900);
+      background: var(--gray-100);
+      transition: all var(--transition);
+      outline: none;
     }
 
-    .filter-count strong { color: var(--purple-600); }
-
-    /* ── Tabs ────────────────────────────────────────────────────────── */
-    .tabs {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 28px;
+    .search-input:focus {
+      border-color: var(--blue-500);
       background: var(--white);
-      border-radius: var(--radius-xl);
-      padding: 5px;
-      box-shadow: var(--shadow-sm);
-      border: 1px solid var(--gray-200);
-      width: fit-content;
+      box-shadow: 0 0 0 3px rgba(73,107,227,.10);
     }
 
-    .tab-btn {
-      padding: 10px 24px;
-      border-radius: var(--radius-lg);
-      border: none;
-      background: transparent;
+    .search-input::placeholder { color: var(--gray-400); }
+
+    .filter-select {
+      padding: 8px 30px 8px 11px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
       font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--gray-500);
+      font-size: 13px;
+      color: var(--gray-700);
+      background: var(--gray-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 9px center;
+      appearance: none;
       cursor: pointer;
       transition: all var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      outline: none;
     }
 
-    .tab-btn:hover { color: var(--purple-600); background: var(--purple-50); }
-
-    .tab-btn.active {
-      background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
-      color: white;
-      box-shadow: 0 2px 8px rgba(107, 79, 208, .3);
+    .filter-select:focus {
+      border-color: var(--blue-500);
+      background-color: var(--white);
+      box-shadow: 0 0 0 3px rgba(73,107,227,.10);
     }
 
-    .tab-badge {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 99px;
-      background: rgba(255,255,255,.25);
-      line-height: 1.4;
-    }
-
-    .tab-btn:not(.active) .tab-badge {
-      background: var(--purple-100);
-      color: var(--purple-600);
-    }
-
-    /* ── Section header ──────────────────────────────────────────────── */
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--gray-900);
-      letter-spacing: -0.3px;
-    }
-
-    .section-subtitle {
-      font-size: 14px;
-      color: var(--gray-500);
-    }
-
-    /* ── Grid ────────────────────────────────────────────────────────── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
-    }
-
-    /* ── Card ────────────────────────────────────────────────────────── */
-    .card {
-      background: var(--white);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--gray-200);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    /* Card thumbnail */
-    .card-thumb {
-      position: relative;
-      height: 160px;
-      background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-50) 100%);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-thumb .thumb-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .card-thumb .thumb-placeholder svg {
-      width: 40px;
-      height: 40px;
-      opacity: .4;
-      color: var(--purple-500);
-    }
-
-    .card-thumb .thumb-placeholder span {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--purple-400);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-    }
-
-    .type-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      padding: 4px 10px;
-      border-radius: 99px;
-    }
-
-    .type-badge.bm {
-      background: var(--purple-600);
-      color: white;
-    }
-
-    .type-badge.cs {
-      background: var(--orange-500);
-      color: white;
-    }
-
-    .ext-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: var(--radius-sm);
-      background: rgba(255,255,255,.9);
-      color: var(--gray-700);
-      backdrop-filter: blur(4px);
-    }
-
-    /* Card body */
-    .card-body {
-      padding: 18px 20px 16px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .card-client {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gray-900);
-      line-height: 1.2;
-    }
-
-    .card-module {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--purple-600);
-    }
-
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .tag {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 99px;
-    }
-
-    .tag-industry {
-      background: var(--gray-100);
-      color: var(--gray-700);
-      border: 1px solid var(--gray-200);
-    }
-
-    .tag-module {
-      background: var(--purple-100);
-      color: var(--purple-700);
-    }
-
-    .tag-lang {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 99px;
-      border: 1.5px solid;
-    }
-
-    .tag-lang-es { background: #FEF3C7; color: #92400E; border-color: #FDE68A; }
-    .tag-lang-en { background: #DBEAFE; color: #1E40AF; border-color: #BFDBFE; }
-    .tag-lang-pt { background: #D1FAE5; color: #065F46; border-color: #A7F3D0; }
-    .tag-lang-fr { background: #EDE9FE; color: #5B21B6; border-color: #DDD6FE; }
-    .tag-lang-default { background: var(--gray-100); color: var(--gray-600); border-color: var(--gray-200); }
-
-    /* Card footer */
-    .card-footer {
-      padding: 12px 20px 16px;
-      border-top: 1px solid var(--gray-100);
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-dl {
-      flex: 1;
-      height: 36px;
-      border-radius: var(--radius);
-      border: 1.5px solid transparent;
-      font-family: inherit;
+    .result-count {
+      margin-left: auto;
       font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-dl-primary {
-      background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
-      color: white;
-      box-shadow: 0 2px 6px rgba(107, 79, 208, .25);
-    }
-
-    .btn-dl-primary:hover {
-      box-shadow: 0 4px 12px rgba(107, 79, 208, .35);
-      transform: translateY(-1px);
-    }
-
-    .btn-dl-secondary {
-      background: white;
-      border-color: var(--gray-200);
-      color: var(--gray-700);
-    }
-
-    .btn-dl-secondary:hover {
-      border-color: var(--purple-300);
-      color: var(--purple-600);
-      background: var(--purple-50);
-    }
-
-    .btn-view {
-      flex: 0 0 36px;
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius);
-      border: 1.5px solid var(--gray-200);
-      background: white;
-      color: var(--gray-500);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      transition: all var(--transition);
-    }
-
-    .btn-view:hover {
-      border-color: var(--purple-300);
-      color: var(--purple-600);
-      background: var(--purple-50);
-    }
-
-    /* ── Empty state ──────────────────────────────────────────────────── */
-    .empty-state {
-      text-align: center;
-      padding: 80px 24px;
       color: var(--gray-400);
+      white-space: nowrap;
+      font-weight: 500;
     }
 
-    .empty-state svg { width: 56px; height: 56px; margin-bottom: 16px; opacity: .5; }
-    .empty-state h3 { font-size: 17px; font-weight: 700; color: var(--gray-500); }
-    .empty-state p  { font-size: 14px; margin-top: 6px; }
+    /* ── Content ────────────────────────────────────────────────────────── */
+    .content {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 28px 48px 72px;
+    }
 
-    /* ── Section panel ────────────────────────────────────────────────── */
     .section-panel { display: none; }
     .section-panel.active { display: block; }
 
-    /* ── Footer ───────────────────────────────────────────────────────── */
-    .footer {
-      text-align: center;
-      padding: 32px;
-      font-size: 12px;
-      color: var(--gray-400);
-      border-top: 1px solid var(--gray-200);
+    /* ── Cards Grid ─────────────────────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
     }
 
-    /* ── Loading ─────────────────────────────────────────────────────── */
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,.85);
+    /* ── Card ───────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      border: 1px solid var(--gray-200);
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Colored top accent bar (by industry) */
+    .card-accent {
+      height: 4px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* Card top row: tipo label + star */
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px 0;
+    }
+
+    .card-tipo {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .card-star {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      color: var(--gray-300);
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      border-radius: 4px;
+    }
+
+    .card-star:hover { color: var(--blue-500); }
+    .card-star.saved { color: #F59E0B; }
+
+    /* Client name */
+    .card-client {
+      padding: 10px 16px 4px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.25;
+      letter-spacing: -.2px;
+    }
+
+    /* Module subtitle */
+    .card-module {
+      padding: 0 16px 12px;
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 400;
+    }
+
+    /* Tags */
+    .card-tags {
+      padding: 0 16px 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .tag-industry {
+      color: var(--white);
+    }
+
+    .tag-lang {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+
+    /* Divider + actions */
+    .card-footer {
+      border-top: 1px solid var(--gray-100);
+      padding: 10px 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .card-btn-view {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-700);
+      background: var(--white);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .card-btn-view:hover {
+      border-color: var(--blue-500);
+      color: var(--blue-800);
+      background: var(--blue-50);
+    }
+
+    .card-btn-dl {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius);
+      background: var(--blue-800);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background var(--transition);
+    }
+
+    .card-btn-dl:hover { background: var(--blue-600); }
+
+    /* ── Empty State ─────────────────────────────────────────────────────── */
+    .empty-state {
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-align: center;
+      padding: 80px 24px;
+      gap: 10px;
+      grid-column: 1 / -1;
+    }
+
+    .empty-icon {
+      width: 52px; height: 52px;
+      background: var(--blue-50);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue-400);
+      margin-bottom: 4px;
+    }
+
+    .empty-state h3 { font-size: 15px; font-weight: 600; color: var(--gray-700); }
+    .empty-state p  { font-size: 13px; color: var(--gray-400); max-width: 320px; line-height: 1.55; }
+
+    /* ── Lightbox ───────────────────────────────────────────────────────── */
+    .lightbox-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(8,14,30,.75);
+      z-index: 1000;
+      align-items: center;
       justify-content: center;
-      z-index: 100;
-      gap: 16px;
-      backdrop-filter: blur(4px);
+      padding: 24px;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-overlay.open { display: flex; }
+
+    .lightbox {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      max-width: 980px;
+      width: 100%;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      animation: lbIn .2s ease;
+    }
+
+    @keyframes lbIn {
+      from { opacity: 0; transform: scale(.96) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .lightbox-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lb-tipo {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      color: var(--blue-500);
+      white-space: nowrap;
+    }
+
+    .lb-client {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .lb-meta {
+      font-size: 12px;
+      color: var(--gray-400);
+      white-space: nowrap;
+    }
+
+    .lb-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      border: none;
+    }
+
+    .btn-primary { background: var(--blue-800); color: var(--white); }
+    .btn-primary:hover { background: var(--blue-600); }
+    .btn-ghost   { background: var(--gray-100); color: var(--gray-700); }
+    .btn-ghost:hover { background: var(--gray-200); }
+
+    .btn-icon-sm {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius);
+      background: var(--gray-100);
+      color: var(--gray-500);
+      border: none; cursor: pointer;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .btn-icon-sm:hover { background: var(--gray-200); color: var(--gray-900); }
+
+    .lightbox-body {
+      flex: 1;
+      overflow: auto;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+    }
+
+    .lightbox-body img {
+      max-width: 100%;
+      max-height: 76vh;
+      display: block;
+      object-fit: contain;
+    }
+
+    .lightbox-body iframe {
+      width: 100%;
+      height: 76vh;
+      border: none;
+      display: block;
+    }
+
+    /* ── Loading ─────────────────────────────────────────────────────────── */
+    .loading-state {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px 24px; gap: 14px;
+      grid-column: 1 / -1;
     }
 
     .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--purple-100);
-      border-top-color: var(--purple-500);
+      width: 32px; height: 32px;
+      border: 3px solid var(--blue-100);
+      border-top-color: var(--blue-500);
       border-radius: 50%;
       animation: spin .7s linear infinite;
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state p { font-size: 13px; color: var(--gray-400); }
 
-    /* ── Responsive ──────────────────────────────────────────────────── */
+    /* ── Responsive ─────────────────────────────────────────────────────── */
     @media (max-width: 768px) {
-      .header { padding: 20px 24px 24px; }
-      .header-stats { display: none; }
-      .main { padding: 24px 20px 60px; }
-      .filters-row { flex-direction: column; }
-      .filter-group { min-width: 100%; }
-      .cards-grid { grid-template-columns: 1fr; }
-      .tabs { width: 100%; }
-      .tab-btn { flex: 1; justify-content: center; font-size: 13px; }
+      .header      { padding: 0 20px; }
+      .hero        { padding: 24px 20px 0; }
+      .toolbar-wrap{ padding: 10px 20px; }
+      .content     { padding: 20px 20px 56px; }
+      .tabs        { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .search-wrap { max-width: 100%; }
+      .hero-text h1{ font-size: 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Loading overlay -->
-<div class="loading-overlay" id="loading">
-  <div class="spinner"></div>
-  <span style="font-size:14px;color:var(--gray-500);font-weight:600;">Cargando repositorio…</span>
-</div>
-
-<!-- ── Header ──────────────────────────────────────────────────────────── -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo-area">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+  <!-- ── Header ────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <!-- Humand horizontal SVG wordmark (inline — always renders) -->
+        <svg class="logo-svg" viewBox="0 0 1495 533" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Humand">
+          <path d="M225.99 232.027C216.174 226.792 205.049 224.221 192.709 224.221C181.21 224.221 170.787 226.792 161.391 231.933C155.268 235.299 149.986 239.412 145.452 244.32V175.094C145.452 171.542 144.424 168.784 142.414 166.727C140.357 164.717 137.693 163.689 134.327 163.689C130.775 163.689 128.017 164.717 125.96 166.727C123.904 168.784 122.922 171.542 122.922 175.094V359.775C122.922 363.141 123.95 365.852 125.96 367.862C127.97 369.918 130.775 370.9 134.327 370.9C137.693 370.9 140.404 369.872 142.414 367.862C144.424 365.852 145.452 363.141 145.452 359.775V282.556C145.452 275.311 147.415 268.907 151.295 263.298C155.175 257.735 160.457 253.295 167.094 250.023C173.732 246.751 181.21 245.115 189.531 245.115C198.365 245.115 206.265 246.844 213.136 250.303C220.054 253.762 225.476 258.904 229.449 265.682C233.422 272.506 235.432 281.294 235.432 292.091V359.728C235.432 362.907 236.507 365.571 238.611 367.675C240.714 369.778 243.472 370.853 246.837 370.853C250.016 370.853 252.68 369.778 254.784 367.675C256.887 365.571 257.962 362.907 257.962 359.728V292.091C257.962 277.414 255.064 265.027 249.361 254.931C243.612 244.834 235.853 237.215 225.99 231.98V232.027Z" fill="#182D7A"/>
+          <path d="M451.945 225.763C448.58 225.763 445.869 226.792 443.859 228.802C441.802 230.858 440.82 233.523 440.82 236.888V314.107C440.82 321.353 438.857 327.756 434.977 333.365C431.098 338.928 425.769 343.368 419.038 346.64C412.307 349.912 404.782 351.548 396.508 351.548C388.235 351.548 380.055 349.819 373.137 346.36C366.219 342.901 360.75 337.759 356.683 330.982C352.617 324.157 350.56 315.369 350.56 304.572V236.935C350.56 233.756 349.485 231.092 347.381 228.989C345.278 226.885 342.614 225.81 339.435 225.81C336.257 225.81 333.592 226.885 331.489 228.989C329.385 231.092 328.31 233.756 328.31 236.935V304.572C328.31 319.249 331.162 331.636 336.817 341.732C342.473 351.829 350.233 359.448 360.049 364.683C369.865 369.918 381.036 372.489 393.61 372.489C405.109 372.489 415.532 369.918 424.928 364.777C431.098 361.411 436.38 357.251 440.867 352.343V359.495C440.867 363.047 441.895 365.805 443.905 367.862C445.915 369.918 448.626 370.9 451.992 370.9C455.357 370.9 458.115 369.872 460.219 367.862C462.322 365.852 463.397 363.047 463.397 359.495V236.935C463.397 233.569 462.322 230.858 460.219 228.848C458.115 226.839 455.357 225.81 451.992 225.81L451.945 225.763Z" fill="#182D7A"/>
+          <path d="M719.08 231.326C711.134 226.558 702.019 224.174 691.735 224.174C680.611 224.174 670.654 226.652 661.867 231.606C654.668 235.673 648.779 241.142 644.151 247.873C639.944 240.861 634.522 235.346 627.791 231.326C619.845 226.558 610.73 224.174 600.447 224.174C590.163 224.174 580.721 226.652 572.588 231.606C568.381 234.177 564.688 237.215 561.463 240.768V237.169C561.463 233.803 560.435 231.045 558.425 228.942C556.368 226.839 553.704 225.763 550.338 225.763C546.786 225.763 544.028 226.839 541.971 228.942C539.915 231.045 538.933 233.803 538.933 237.169V359.728C538.933 363.094 539.961 365.805 541.971 367.815C543.981 369.872 546.786 370.853 550.338 370.853C553.704 370.853 556.415 369.825 558.425 367.815C560.435 365.805 561.463 363.094 561.463 359.728V282.509C561.463 271.384 564.829 262.363 571.56 255.445C578.291 248.527 586.845 245.115 597.315 245.115C607.037 245.115 615.03 248.48 621.341 255.211C627.604 261.942 630.736 271.384 630.736 283.584V359.728C630.736 363.094 631.811 365.805 633.915 367.815C636.018 369.872 638.682 370.853 641.861 370.853C645.226 370.853 647.937 369.825 649.947 367.815C651.957 365.805 652.986 363.094 652.986 359.728V283.584C652.986 272.086 656.304 262.784 662.942 255.726C669.579 248.667 678.087 245.115 688.557 245.115C699.027 245.115 706.506 248.48 712.723 255.211C718.893 261.942 722.025 271.384 722.025 283.584V359.728C722.025 363.094 723.1 365.805 725.203 367.815C727.307 369.872 730.065 370.853 733.43 370.853C736.609 370.853 739.273 369.825 741.376 367.815C743.48 365.805 744.555 363.094 744.555 359.728V283.584C744.555 271.384 742.311 260.821 737.777 251.893C733.29 242.965 727.026 236.094 719.08 231.326Z" fill="#182D7A"/>
+          <path d="M920.589 234.13C909.511 227.68 897.124 224.455 883.288 224.455C869.452 224.455 856.738 227.68 845.614 234.13C834.489 240.581 825.654 249.369 819.204 260.54C812.753 271.665 809.528 284.332 809.528 298.495C809.528 312.658 812.613 325.045 818.83 336.17C825 347.295 833.414 356.129 844.024 362.58C854.635 369.03 866.648 372.255 880.11 372.255C893.572 372.255 904.556 369.217 914.746 363.094C922.365 358.513 928.769 352.764 934.004 345.799V359.775C934.004 363.141 935.126 365.852 937.323 367.862C939.52 369.918 942.231 370.9 945.41 370.9C948.775 370.9 951.533 369.872 953.636 367.862C955.74 365.852 956.815 363.141 956.815 359.775V298.495C956.628 284.332 953.309 271.712 946.859 260.54C940.408 249.415 931.667 240.581 920.589 234.13ZM928.021 325.793C923.534 333.926 917.411 340.33 909.698 345.051C901.985 349.725 893.198 352.063 883.288 352.063C873.379 352.063 864.778 349.725 856.879 345.051C849.026 340.377 842.762 333.973 838.181 325.793C833.601 317.66 831.263 308.545 831.263 298.448C831.263 288.352 833.554 279.05 838.181 271.01C842.762 262.971 849.026 256.567 856.879 251.752C864.731 246.985 873.566 244.601 883.288 244.601C893.011 244.601 901.985 246.985 909.698 251.752C917.411 256.52 923.487 262.924 928.021 271.01C932.555 279.05 934.799 288.212 934.799 298.448C934.799 308.685 932.555 317.66 928.021 325.793Z" fill="#182D7A"/>
+          <path d="M1127.57 232.027C1117.75 226.792 1106.63 224.221 1094.29 224.221C1082.79 224.221 1072.36 226.792 1062.97 231.934C1056.84 235.299 1051.56 239.412 1047.03 244.32V237.262C1047.03 233.71 1046 230.952 1043.99 228.895C1041.93 226.885 1039.27 225.857 1035.9 225.857C1032.35 225.857 1029.59 226.885 1027.54 228.895C1025.48 230.952 1024.5 233.71 1024.5 237.262V359.822C1024.5 363.187 1025.53 365.898 1027.54 367.908C1029.55 369.965 1032.35 370.947 1035.9 370.947C1039.27 370.947 1041.98 369.918 1043.99 367.908C1046 365.898 1047.03 363.187 1047.03 359.822V282.603C1047.03 275.358 1048.99 268.954 1052.87 263.345C1056.75 257.782 1062.03 253.342 1068.67 250.07C1075.31 246.798 1082.79 245.162 1091.11 245.162C1099.94 245.162 1107.84 246.891 1114.71 250.35C1121.63 253.809 1127.05 258.951 1131.03 265.729C1135 272.553 1137.01 281.341 1137.01 292.138V359.775C1137.01 362.954 1138.08 365.618 1140.19 367.721C1142.29 369.825 1145.05 370.9 1148.41 370.9C1151.59 370.9 1154.26 369.825 1156.36 367.721C1158.46 365.618 1159.54 362.954 1159.54 359.775V292.138C1159.54 277.461 1156.64 265.074 1150.94 254.978C1145.19 244.881 1137.43 237.262 1127.57 232.027Z" fill="#182D7A"/>
+          <path d="M1368.85 166.727C1366.75 164.717 1363.99 163.689 1360.63 163.689C1357.45 163.689 1354.74 164.717 1352.54 166.727C1350.34 168.784 1349.22 171.542 1349.22 175.094V250.958C1343.38 243.012 1335.81 236.608 1326.55 231.7C1317.25 226.838 1306.87 224.408 1295.37 224.408C1281.91 224.408 1269.9 227.633 1259.29 234.084C1248.68 240.534 1240.26 249.322 1234.09 260.493C1227.88 271.618 1224.79 284.192 1224.79 298.168C1224.79 312.144 1228.02 324.952 1234.47 336.123C1240.92 347.248 1249.71 356.082 1260.88 362.533C1272 368.983 1284.58 372.209 1298.55 372.209C1312.53 372.209 1324.73 368.983 1335.71 362.533C1346.7 356.082 1355.39 347.342 1361.84 336.263C1368.29 325.232 1371.7 312.799 1372.08 298.963V175.094C1372.08 171.542 1371 168.784 1368.9 166.727H1368.85ZM1343.28 325.653C1338.8 333.693 1332.67 340.096 1324.96 344.911C1317.25 349.679 1308.46 352.063 1298.55 352.063C1288.64 352.063 1280.04 349.679 1272.14 344.911C1264.29 340.143 1258.03 333.739 1253.44 325.653C1248.86 317.613 1246.53 308.451 1246.53 298.215C1246.53 287.978 1248.82 279.003 1253.44 270.87C1258.03 262.737 1264.29 256.333 1272.14 251.612C1279.99 246.938 1288.83 244.601 1298.55 244.601C1308.27 244.601 1317.25 246.938 1324.96 251.612C1332.67 256.286 1338.75 262.737 1343.28 270.87C1347.82 279.003 1350.06 288.118 1350.06 298.215C1350.06 308.311 1347.82 317.613 1343.28 325.653Z" fill="#182D7A"/>
+        </svg>
+        <div class="logo-divider"></div>
+        <span class="header-label" data-i18n="header_label">Success Stories</span>
       </div>
-      <div class="logo-text">
-        <h1>Humand — Repositorio</h1>
-        <p>Customer Spotlights &amp; Benchmarks · Para SAMs</p>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="ES">ES</button>
+        <button class="lang-btn" data-lang="EN">EN</button>
+        <button class="lang-btn" data-lang="PT">PT</button>
       </div>
     </div>
-    <div>
-      <div class="header-stats">
-        <div class="stat-pill">
-          <span class="num" id="stat-bm">0</span>
-          <span class="label">Bench-<br>marks</span>
+  </header>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 data-i18n="hero_title">Success Stories Repository</h1>
+        <p data-i18n="hero_subtitle">Explore customer spotlights, benchmarks and success stories</p>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab-btn" data-section="CE" role="tab">
+          <span data-i18n="tab_ce">Casos de Éxito</span>
+          <span class="tab-badge" id="badge-ce">0</span>
+        </button>
+        <button class="tab-btn active" data-section="CS" role="tab">
+          <span data-i18n="tab_cs">Customer Spotlights</span>
+          <span class="tab-badge" id="badge-cs">0</span>
+        </button>
+        <button class="tab-btn" data-section="BM" role="tab">
+          <span data-i18n="tab_bm">Benchmarks</span>
+          <span class="tab-badge" id="badge-bm">0</span>
+        </button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ── Toolbar ───────────────────────────────────────────────────────── -->
+  <div class="toolbar-wrap">
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="search-input" placeholder="OXXO, Ledesma, Siemens..." />
+      </div>
+      <select class="filter-select" id="filter-module"></select>
+      <select class="filter-select" id="filter-industry"></select>
+      <span class="result-count" id="result-count"></span>
+    </div>
+  </div>
+
+  <!-- ── Content ───────────────────────────────────────────────────────── -->
+  <main class="content">
+    <div class="section-panel" id="panel-CE"><div class="cards-grid" id="grid-CE"></div></div>
+    <div class="section-panel active" id="panel-CS"><div class="cards-grid" id="grid-CS"></div></div>
+    <div class="section-panel" id="panel-BM"><div class="cards-grid" id="grid-BM"></div></div>
+  </main>
+
+  <!-- ── Lightbox ──────────────────────────────────────────────────────── -->
+  <div class="lightbox-overlay" id="lightbox-overlay" role="dialog" aria-modal="true">
+    <div class="lightbox">
+      <div class="lightbox-header">
+        <span class="lb-tipo" id="lb-tipo"></span>
+        <span class="lb-client" id="lb-client"></span>
+        <span class="lb-meta" id="lb-meta"></span>
+        <div class="lb-actions">
+          <a href="#" id="lb-drive-btn" target="_blank" rel="noopener" class="btn btn-ghost">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-i18n="lb_open">Ver en Drive</span>
+          </a>
+          <a href="#" id="lb-dl-btn" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="lb_download">Descargar</span>
+          </a>
+          <button class="btn-icon-sm" id="lb-close">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
         </div>
-        <div class="stat-pill">
-          <span class="num" id="stat-cs">0</span>
-          <span class="label">Customer<br>Spotlights</span>
-        </div>
       </div>
-      <div class="last-updated" id="last-updated">Última actualización: —</div>
-    </div>
-  </div>
-</header>
-
-<!-- ── Main ────────────────────────────────────────────────────────────── -->
-<main class="main">
-
-  <!-- Filter bar -->
-  <div class="filters-card">
-    <div class="filters-title">Filtros</div>
-    <div class="filters-row">
-
-      <div class="filter-group search-group">
-        <label for="search-input">Buscar cliente</label>
-        <div class="search-wrapper">
-          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="search-input" placeholder="Ej: Naranja, Farmacity…" autocomplete="off" />
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <label for="filter-module">Módulo</label>
-        <select id="filter-module">
-          <option value="">Todos los módulos</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label for="filter-industry">Industria</label>
-        <select id="filter-industry">
-          <option value="">Todas las industrias</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label for="filter-lang">Idioma</label>
-        <select id="filter-lang">
-          <option value="">Todos los idiomas</option>
-        </select>
-      </div>
-
-      <button class="btn-reset" id="btn-reset">Limpiar filtros</button>
-
-      <div class="filter-count" id="filter-count"></div>
+      <div class="lightbox-body" id="lb-body"></div>
     </div>
   </div>
 
-  <!-- Tabs -->
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="benchmarks">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Benchmarks
-      <span class="tab-badge" id="badge-bm">0</span>
-    </button>
-    <button class="tab-btn" data-tab="spotlights">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      Customer Spotlights
-      <span class="tab-badge" id="badge-cs">0</span>
-    </button>
-  </div>
-
-  <!-- Benchmarks section -->
-  <div class="section-panel active" id="panel-benchmarks">
-    <div class="section-header">
-      <h2 class="section-title">Benchmarks</h2>
-      <span class="section-subtitle">Comparativas de uso y adopción por módulo</span>
-    </div>
-    <div class="cards-grid" id="grid-benchmarks"></div>
-    <div class="empty-state" id="empty-benchmarks" style="display:none">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <h3>Sin resultados</h3>
-      <p>No hay benchmarks que coincidan con los filtros seleccionados.</p>
-    </div>
-  </div>
-
-  <!-- Spotlights section -->
-  <div class="section-panel" id="panel-spotlights">
-    <div class="section-header">
-      <h2 class="section-title">Customer Spotlights</h2>
-      <span class="section-subtitle">Casos de éxito y resultados destacados</span>
-    </div>
-    <div class="cards-grid" id="grid-spotlights"></div>
-    <div class="empty-state" id="empty-spotlights" style="display:none">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <h3>Sin resultados</h3>
-      <p>No hay customer spotlights que coincidan con los filtros seleccionados.</p>
-    </div>
-  </div>
-
-</main>
-
-<footer class="footer">
-  Humand &copy; <span id="footer-year"></span> · Repositorio interno para SAMs · Actualización automática diaria
-</footer>
-
-<!-- ── JavaScript ──────────────────────────────────────────────────────── -->
-<script>
-  const DATA_URL = 'data.json';
-
-  let allData = { benchmarks: [], spotlights: [] };
-  let activeTab = 'benchmarks';
-
-  const LANG_FLAG = { ES: '🇦🇷', EN: '🇺🇸', PT: '🇧🇷', FR: '🇫🇷' };
-
-  // ── Fetch data ────────────────────────────────────────────────────────
-  async function loadData() {
-    try {
-      const res = await fetch(DATA_URL + '?t=' + Date.now());
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      allData = await res.json();
-
-      document.getElementById('stat-bm').textContent = allData.total_benchmarks ?? allData.benchmarks.length;
-      document.getElementById('stat-cs').textContent = allData.total_spotlights ?? allData.spotlights.length;
-      document.getElementById('badge-bm').textContent = allData.benchmarks.length;
-      document.getElementById('badge-cs').textContent = allData.spotlights.length;
-
-      if (allData.last_updated) {
-        const d = new Date(allData.last_updated);
-        document.getElementById('last-updated').textContent =
-          'Última actualización: ' + d.toLocaleDateString('es-AR', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
-      }
-
-      populateFilters();
-      render();
-
-    } catch (e) {
-      console.error('Error loading data.json:', e);
-      document.getElementById('grid-benchmarks').innerHTML =
-        '<div class="empty-state" style="grid-column:1/-1"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Error al cargar los datos</h3><p>Verificá que data.json esté presente y sea válido.</p></div>';
-    } finally {
-      document.getElementById('loading').style.display = 'none';
+  <script>
+  /* ═══════════════════════════════════════════════════════════════════
+     I18N
+  ═══════════════════════════════════════════════════════════════════ */
+  const T = {
+    ES: {
+      header_label: "Success Stories",
+      hero_title:   "Success Stories Repository",
+      hero_subtitle:"Explora spotlights, benchmarks y casos de éxito de clientes Humand",
+      tab_ce:  "Casos de Éxito",
+      tab_cs:  "Customer Spotlights",
+      tab_bm:  "Benchmarks",
+      tipo_ce: "CASO DE ÉXITO",
+      tipo_cs: "CUSTOMER SPOTLIGHT",
+      tipo_bm: "BENCHMARK",
+      filter_modules:   "Todos los módulos",
+      filter_industries:"Todas las industrias",
+      search_ph: "OXXO, Ledesma, Siemens...",
+      count: n => `${n} resultado${n!==1?'s':''}`,
+      empty_title:"Sin resultados",
+      empty_body: "Ningún contenido coincide con los filtros.",
+      ce_soon_title:"Próximamente",
+      ce_soon_body: "Los Casos de Éxito estarán disponibles pronto.",
+      btn_view: "Ver",
+      lb_open: "Ver en Drive",
+      lb_download: "Descargar",
+    },
+    EN: {
+      header_label: "Success Stories",
+      hero_title:   "Success Stories Repository",
+      hero_subtitle:"Explore spotlights, benchmarks and success stories from Humand clients",
+      tab_ce:  "Success Stories",
+      tab_cs:  "Customer Spotlights",
+      tab_bm:  "Benchmarks",
+      tipo_ce: "SUCCESS STORY",
+      tipo_cs: "CUSTOMER SPOTLIGHT",
+      tipo_bm: "BENCHMARK",
+      filter_modules:   "All modules",
+      filter_industries:"All industries",
+      search_ph: "OXXO, Ledesma, Siemens...",
+      count: n => `${n} result${n!==1?'s':''}`,
+      empty_title:"No results",
+      empty_body: "No content matches the current filters.",
+      ce_soon_title:"Coming soon",
+      ce_soon_body: "Success Stories will be available shortly.",
+      btn_view: "View",
+      lb_open: "Open in Drive",
+      lb_download: "Download",
+    },
+    PT: {
+      header_label: "Histórias de Sucesso",
+      hero_title:   "Repositório de Histórias de Sucesso",
+      hero_subtitle:"Explore spotlights, benchmarks e casos de sucesso de clientes Humand",
+      tab_ce:  "Casos de Sucesso",
+      tab_cs:  "Customer Spotlights",
+      tab_bm:  "Benchmarks",
+      tipo_ce: "CASO DE SUCESSO",
+      tipo_cs: "CUSTOMER SPOTLIGHT",
+      tipo_bm: "BENCHMARK",
+      filter_modules:   "Todos os módulos",
+      filter_industries:"Todos os setores",
+      search_ph: "OXXO, Ledesma, Siemens...",
+      count: n => `${n} resultado${n!==1?'s':''}`,
+      empty_title:"Sem resultados",
+      empty_body: "Nenhum conteúdo corresponde aos filtros.",
+      ce_soon_title:"Em breve",
+      ce_soon_body: "Os Casos de Sucesso estarão disponíveis em breve.",
+      btn_view: "Ver",
+      lb_open: "Ver no Drive",
+      lb_download: "Baixar",
     }
-  }
+  };
 
-  // ── Populate filter dropdowns ─────────────────────────────────────────
-  function populateFilters() {
-    const all = [...allData.benchmarks, ...allData.spotlights];
+  /* ═══════════════════════════════════════════════════════════════════
+     MODULE NAMES
+  ═══════════════════════════════════════════════════════════════════ */
+  const MODULES = {
+    DOCUMENTOS:    { ES:"Documentos personales", EN:"Personal Documents", PT:"Documentos pessoais" },
+    VACACIONES:    { ES:"Vacaciones y permisos",  EN:"Time Off",           PT:"Férias e licenças" },
+    MURO:          { ES:"Muro",                   EN:"Feed",               PT:"Mural" },
+    SERVICE:       { ES:"Service Management",     EN:"Service Management", PT:"Service Management" },
+    DESEMPENO:     { ES:"Gestión del desempeño",  EN:"Performance Review", PT:"Avaliação de desempenho" },
+    APRENDIZAJE:   { ES:"Aprendizaje",            EN:"Learning",           PT:"Aprendizagem" },
+    FORMULARIOS:   { ES:"Formularios",            EN:"Forms",              PT:"Formulários" },
+    NOTICIAS:      { ES:"Noticias",               EN:"News",               PT:"Notícias" },
+    ENCUESTAS:     { ES:"Encuestas",              EN:"Surveys",            PT:"Pesquisas" },
+    PX:            { ES:"People Experience",      EN:"People Experience",  PT:"People Experience" },
+    ONBOARDING:    { ES:"Onboarding",             EN:"Onboarding",         PT:"Onboarding" },
+    BENEFICIOS:    { ES:"Beneficios",             EN:"Benefits",           PT:"Benefícios" },
+    COMUNICACION:  { ES:"Comunicación",           EN:"Communication",      PT:"Comunicação" },
+    RECLUTAMIENTO: { ES:"Reclutamiento",          EN:"Recruitment",        PT:"Recrutamento" },
+    RECONOCIMIENTO:{ ES:"Reconocimiento",         EN:"Recognition",        PT:"Reconhecimento" },
+  };
 
-    const modules    = [...new Set(all.map(f => f.modulo_display))].sort();
-    const industries = [...new Set(all.map(f => f.industria_display))].sort();
-    const langs      = [...new Set(all.map(f => f.idioma_display).filter(Boolean))].sort();
+  /* ═══════════════════════════════════════════════════════════════════
+     INDUSTRY CONFIG — name + accent color
+  ═══════════════════════════════════════════════════════════════════ */
+  const INDUSTRIES = {
+    RETAIL:             { ES:"Retail",                 EN:"Retail",              PT:"Varejo",              color:"#E84393" },
+    MANUFACTURING:      { ES:"Manufactura",            EN:"Manufacturing",       PT:"Manufatura",          color:"#F57C00" },
+    PHARMA:             { ES:"Farmacéutica",           EN:"Pharma",              PT:"Farmacêutica",        color:"#7B1FA2" },
+    PHARMACEUTICALS:    { ES:"Farmacéutica",           EN:"Pharma",              PT:"Farmacêutica",        color:"#7B1FA2" },
+    LOGISTICS:          { ES:"Logística",              EN:"Logistics",           PT:"Logística",           color:"#00796B" },
+    TRANSPORT:          { ES:"Transporte",             EN:"Transport",           PT:"Transporte",          color:"#0277BD" },
+    TRANSPORTATION:     { ES:"Transporte",             EN:"Transport",           PT:"Transporte",          color:"#0277BD" },
+    CONSTRUCTION:       { ES:"Construcción",           EN:"Construction",        PT:"Construção",          color:"#6D4C41" },
+    FINANCE:            { ES:"Finanzas",               EN:"Finance",             PT:"Finanças",            color:"#1565C0" },
+    FINANCIALSERVICES:  { ES:"Serv. financieros",      EN:"Financial Services",  PT:"Serv. financeiros",   color:"#1565C0" },
+    FOOD:               { ES:"Alimentos",              EN:"Food & Beverage",     PT:"Alimentos",           color:"#2E7D32" },
+    FOODSERVICES:       { ES:"Alimentos",              EN:"Food & Beverage",     PT:"Alimentos",           color:"#2E7D32" },
+    HEALTHCARE:         { ES:"Salud",                  EN:"Healthcare",          PT:"Saúde",               color:"#C62828" },
+    AGRICULTURE:        { ES:"Agro",                   EN:"Agriculture",         PT:"Agronegócio",         color:"#388E3C" },
+    AUTOMOTIVE:         { ES:"Automotriz",             EN:"Automotive",          PT:"Automotivo",          color:"#455A64" },
+    CONSUMER:           { ES:"Consumo masivo",         EN:"Consumer Goods",      PT:"Bens de consumo",     color:"#EF6C00" },
+    CONSUMERGOODS:      { ES:"Consumo masivo",         EN:"Consumer Goods",      PT:"Bens de consumo",     color:"#EF6C00" },
+    CONSULTINGSERVICES: { ES:"Consultoría",            EN:"Consulting",          PT:"Consultoria",         color:"#4527A0" },
+    "OIL&ENERGY":       { ES:"Oil & Energy",           EN:"Oil & Energy",        PT:"Óleo e Energia",      color:"#F9A825" },
+    ENERGY:             { ES:"Energía",                EN:"Energy",              PT:"Energia",             color:"#F9A825" },
+    SERVICES:           { ES:"Servicios",              EN:"Services",            PT:"Serviços",            color:"#546E7A" },
+  };
 
-    const modSel = document.getElementById('filter-module');
-    modules.forEach(m => {
-      const opt = document.createElement('option');
-      opt.value = m; opt.textContent = m;
-      modSel.appendChild(opt);
-    });
+  /* ═══════════════════════════════════════════════════════════════════
+     STATE
+  ═══════════════════════════════════════════════════════════════════ */
+  let allData     = { benchmarks:[], spotlights:[], case_studies:[] };
+  let activeLang  = 'ES';
+  let activeTab   = 'CS';
+  let filterMod   = '';
+  let filterInd   = '';
+  let searchQ     = '';
 
-    const indSel = document.getElementById('filter-industry');
-    industries.forEach(i => {
-      const opt = document.createElement('option');
-      opt.value = i; opt.textContent = i;
-      indSel.appendChild(opt);
-    });
+  /* ═══════════════════════════════════════════════════════════════════
+     HELPERS
+  ═══════════════════════════════════════════════════════════════════ */
+  const t   = k => (T[activeLang][k] ?? T.ES[k] ?? k);
+  const mod = c => (MODULES[c]?.[activeLang] ?? MODULES[c]?.ES ?? c);
+  const ind = c => (INDUSTRIES[c]?.[activeLang] ?? INDUSTRIES[c]?.ES ?? c);
+  const indColor = c => (INDUSTRIES[c]?.color ?? '#496BE3');
+  const isImg    = e => ['jpg','jpeg','png','gif','webp'].includes((e||'').toLowerCase());
+  const isSlides = e => e === 'gslides';
+  const tipoLabel= tp => t(`tipo_${tp.toLowerCase()}`) || tp;
 
-    const langSel = document.getElementById('filter-lang');
-    langs.forEach(l => {
-      const opt = document.createElement('option');
-      opt.value = l; opt.textContent = l;
-      langSel.appendChild(opt);
-    });
-  }
-
-  // ── Filter logic ──────────────────────────────────────────────────────
-  function getFilters() {
-    return {
-      search:   document.getElementById('search-input').value.trim().toLowerCase(),
-      module:   document.getElementById('filter-module').value,
-      industry: document.getElementById('filter-industry').value,
-      lang:     document.getElementById('filter-lang').value,
-    };
+  function getItems(tab) {
+    if (tab==='CS') return allData.spotlights.filter(i=>i.tipo==='CS');
+    if (tab==='BM') return allData.benchmarks.filter(i=>i.tipo==='BM');
+    if (tab==='CE') return (allData.case_studies||[]).filter(i=>i.tipo==='CE');
+    return [];
   }
 
   function applyFilters(items) {
-    const { search, module, industry, lang } = getFilters();
-    return items.filter(item => {
-      if (search && !item.cliente.toLowerCase().includes(search) &&
-          !item.modulo_display.toLowerCase().includes(search)) return false;
-      if (module && item.modulo_display !== module) return false;
-      if (industry && item.industria_display !== industry) return false;
-      if (lang && item.idioma_display !== lang) return false;
+    return items.filter(i => {
+      if (i.idioma_code && i.idioma_code !== activeLang) return false;
+      if (filterMod && i.modulo_code !== filterMod) return false;
+      if (filterInd && i.industria_code !== filterInd) return false;
+      if (searchQ) {
+        const q = searchQ.toLowerCase();
+        const hay = [i.cliente,i.modulo_code,i.modulo_display,i.industria_code,i.display_name].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
       return true;
     });
   }
 
-  // ── Render cards ──────────────────────────────────────────────────────
-  function cardHTML(item) {
-    const isBM = item.tipo === 'BM';
-    const typeCls = isBM ? 'bm' : 'cs';
-    const typeLabel = isBM ? 'Benchmark' : 'Spotlight';
-    const hasThumb = item.thumbnail_url && item.thumbnail_url !== '';
-    const isPDF = item.extension === 'pdf';
-    const isPNG = item.extension === 'png' || item.extension === 'jpg' || item.extension === 'jpeg';
+  /* ═══════════════════════════════════════════════════════════════════
+     RENDER CARD
+  ═══════════════════════════════════════════════════════════════════ */
+  function renderCard(item) {
+    const div = document.createElement('div');
+    div.className = 'card';
 
-    const thumbContent = hasThumb
-      ? `<img src="${item.thumbnail_url}" alt="${item.display_name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" /><div class="thumb-placeholder" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>${item.extension.toUpperCase()}</span></div>`
-      : `<div class="thumb-placeholder"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>${item.extension.toUpperCase()}</span></div>`;
+    const indCode   = item.industria_code || '';
+    const color     = indColor(indCode);
+    const client    = item.cliente || (item.display_name||'').split('—')[0].trim() || '—';
+    const modLabel  = mod(item.modulo_code);
+    const indLabel  = ind(indCode);
+    const tipo      = item.tipo || 'CS';
+    const isSlide   = isSlides(item.extension);
 
-    // Build download buttons based on available format
-    let dlButtons = '';
-    if (item.download_url && item.download_url !== '#') {
-      // Primary download: native format
-      dlButtons += `<a class="btn-dl btn-dl-primary" href="${item.download_url}" target="_blank" rel="noopener">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Descargar ${item.extension.toUpperCase()}
-      </a>`;
+    div.innerHTML = `
+      <div class="card-accent" style="background:${color}"></div>
+      <div class="card-top">
+        <span class="card-tipo">${tipoLabel(tipo)}</span>
+        <button class="card-star" title="Guardar" aria-label="Guardar">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </button>
+      </div>
+      <div class="card-client">${client}</div>
+      <div class="card-module">${modLabel}${isSlide ? ' · Slides' : ''}</div>
+      <div class="card-tags">
+        <span class="tag tag-industry" style="background:${color}">${indLabel}</span>
+        <span class="tag tag-lang">${item.idioma_code||'ES'}</span>
+      </div>
+      <div class="card-footer">
+        <button class="card-btn-view" data-action="view">
+          <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          ${t('btn_view')}
+        </button>
+        <a class="card-btn-dl" href="${item.download_url||'#'}" target="_blank" rel="noopener" title="${t('lb_download')}" onclick="event.stopPropagation()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+      </div>`;
+
+    // Star toggle
+    div.querySelector('.card-star').addEventListener('click', e => {
+      e.stopPropagation();
+      e.currentTarget.classList.toggle('saved');
+    });
+
+    // View button → lightbox
+    div.querySelector('[data-action="view"]').addEventListener('click', e => {
+      e.stopPropagation();
+      openLightbox(item);
+    });
+
+    // Clicking the card body (not footer) also opens lightbox
+    div.addEventListener('click', e => {
+      if (!e.target.closest('.card-footer') && !e.target.closest('.card-star')) {
+        openLightbox(item);
+      }
+    });
+
+    return div;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     RENDER SECTION
+  ═══════════════════════════════════════════════════════════════════ */
+  function renderSection(tipo) {
+    const grid = document.getElementById(`grid-${tipo}`);
+    if (!grid) return;
+    const raw      = getItems(tipo);
+    const filtered = applyFilters(raw);
+    grid.innerHTML  = '';
+
+    if (raw.length === 0 && tipo === 'CE') {
+      grid.appendChild(emptyNode(t('ce_soon_title'), t('ce_soon_body'), true));
+    } else if (filtered.length === 0) {
+      grid.appendChild(emptyNode(t('empty_title'), t('empty_body'), false));
+    } else {
+      filtered.forEach(item => grid.appendChild(renderCard(item)));
     }
 
-    // View in Drive button
-    const viewBtn = item.view_url && item.view_url !== '#'
-      ? `<a class="btn-view" href="${item.view_url}" target="_blank" rel="noopener" title="Ver en Drive">
-           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-         </a>`
-      : '';
+    const langCount = raw.filter(i => !i.idioma_code || i.idioma_code === activeLang).length;
+    const badge = document.getElementById(`badge-${tipo.toLowerCase()}`);
+    if (badge) badge.textContent = langCount;
 
-    return `
-      <div class="card" data-module="${item.modulo_display}" data-industry="${item.industria_display}" data-client="${item.cliente}">
-        <div class="card-thumb">
-          ${thumbContent}
-          <span class="type-badge ${typeCls}">${typeLabel}</span>
-          <span class="ext-badge">${item.extension.toUpperCase()}</span>
-        </div>
-        <div class="card-body">
-          <div class="card-client">${item.cliente}</div>
-          <div class="card-module">${item.modulo_display}</div>
-          <div class="card-tags">
-            <span class="tag tag-industry">${item.industria_display}</span>
-            <span class="tag tag-module">${item.modulo_display}</span>
-            ${item.idioma_display ? `<span class="tag tag-lang tag-lang-${(item.idioma_code||'').toLowerCase()}" title="${item.idioma_display}">${LANG_FLAG[item.idioma_code] || ''} ${item.idioma_display}</span>` : ''}
-          </div>
-        </div>
-        <div class="card-footer">
-          ${dlButtons}
-          ${viewBtn}
-        </div>
+    if (tipo === activeTab) {
+      const rc = document.getElementById('result-count');
+      if (rc) rc.textContent = t('count')(filtered.length);
+    }
+  }
+
+  function emptyNode(title, body, isCE) {
+    const div = document.createElement('div');
+    div.className = 'empty-state';
+    div.innerHTML = `
+      <div class="empty-icon">
+        ${isCE
+          ? `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+          : `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>`}
       </div>
-    `;
+      <h3>${title}</h3>
+      <p>${body}</p>`;
+    return div;
   }
 
-  function render() {
-    const { search, module, industry } = getFilters();
+  /* ═══════════════════════════════════════════════════════════════════
+     FILTERS DROPDOWNS
+  ═══════════════════════════════════════════════════════════════════ */
+  function buildFilters() {
+    const all  = [...allData.spotlights, ...allData.benchmarks, ...(allData.case_studies||[])];
+    const mods = [...new Set(all.map(i=>i.modulo_code).filter(Boolean))].sort();
+    const inds = [...new Set(all.map(i=>i.industria_code).filter(Boolean))].sort();
 
-    const filteredBM = applyFilters(allData.benchmarks);
-    const filteredCS = applyFilters(allData.spotlights);
+    const ms = document.getElementById('filter-module');
+    const is = document.getElementById('filter-industry');
+    const pMod = ms.value, pInd = is.value;
 
-    // Benchmarks
-    const gridBM = document.getElementById('grid-benchmarks');
-    const emptyBM = document.getElementById('empty-benchmarks');
-    gridBM.innerHTML = filteredBM.map(cardHTML).join('');
-    emptyBM.style.display = filteredBM.length === 0 ? 'block' : 'none';
+    ms.innerHTML = `<option value="">${t('filter_modules')}</option>`;
+    mods.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=mod(c); if(c===pMod)o.selected=true; ms.appendChild(o); });
 
-    // Spotlights
-    const gridCS = document.getElementById('grid-spotlights');
-    const emptyCS = document.getElementById('empty-spotlights');
-    gridCS.innerHTML = filteredCS.map(cardHTML).join('');
-    emptyCS.style.display = filteredCS.length === 0 ? 'block' : 'none';
+    is.innerHTML = `<option value="">${t('filter_industries')}</option>`;
+    inds.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=ind(c); if(c===pInd)o.selected=true; is.appendChild(o); });
 
-    // Update badges with filtered counts
-    document.getElementById('badge-bm').textContent = filteredBM.length;
-    document.getElementById('badge-cs').textContent = filteredCS.length;
-
-    // Filter count label
-    const total = filteredBM.length + filteredCS.length;
-    const hasFilters = search || module || industry || lang;
-    document.getElementById('filter-count').innerHTML = hasFilters
-      ? `<strong>${total}</strong> resultado${total !== 1 ? 's' : ''}`
-      : '';
+    document.getElementById('search-input').placeholder = t('search_ph');
   }
 
-  // ── Tabs ──────────────────────────────────────────────────────────────
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = btn.dataset.tab;
-      activeTab = tab;
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('panel-' + tab).classList.add('active');
+  function renderAll() {
+    buildFilters();
+    ['CE','CS','BM'].forEach(renderSection);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     I18N APPLY
+  ═══════════════════════════════════════════════════════════════════ */
+  function applyI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = T[activeLang][el.dataset.i18n];
+      if (typeof v === 'string') el.textContent = v;
     });
-  });
+    document.getElementById('lb-drive-btn') && (document.querySelector('#lb-drive-btn [data-i18n]')&&(document.querySelector('#lb-drive-btn [data-i18n]').textContent = t('lb_open')));
+    document.getElementById('lb-dl-btn')    && (document.querySelector('#lb-dl-btn [data-i18n]')&&(document.querySelector('#lb-dl-btn [data-i18n]').textContent = t('lb_download')));
+  }
 
-  // ── Filter events ─────────────────────────────────────────────────────
-  ['search-input', 'filter-module', 'filter-industry', 'filter-lang'].forEach(id => {
-    document.getElementById(id).addEventListener('input', render);
-    document.getElementById(id).addEventListener('change', render);
-  });
+  /* ═══════════════════════════════════════════════════════════════════
+     LIGHTBOX
+  ═══════════════════════════════════════════════════════════════════ */
+  function openLightbox(item) {
+    const tipo   = item.tipo || 'CS';
+    const client = item.cliente || (item.display_name||'').split('—')[0].trim();
+    const modL   = mod(item.modulo_code);
+    const indL   = ind(item.industria_code);
 
-  document.getElementById('btn-reset').addEventListener('click', () => {
-    document.getElementById('search-input').value = '';
-    document.getElementById('filter-module').value = '';
-    document.getElementById('filter-industry').value = '';
-    document.getElementById('filter-lang').value = '';
-    render();
-  });
+    document.getElementById('lb-tipo').textContent   = tipoLabel(tipo);
+    document.getElementById('lb-client').textContent = client;
+    document.getElementById('lb-meta').textContent   = [modL, indL].filter(Boolean).join(' · ');
+    document.getElementById('lb-drive-btn').href     = item.view_url || '#';
+    document.getElementById('lb-dl-btn').href        = item.download_url || '#';
 
-  // ── Footer year ───────────────────────────────────────────────────────
-  document.getElementById('footer-year').textContent = new Date().getFullYear();
+    // Update button labels
+    const openSpan = document.querySelector('#lb-drive-btn [data-i18n]');
+    const dlSpan   = document.querySelector('#lb-dl-btn [data-i18n]');
+    if (openSpan) openSpan.textContent = t('lb_open');
+    if (dlSpan)   dlSpan.textContent   = t('lb_download');
 
-  // ── Init ──────────────────────────────────────────────────────────────
+    const body = document.getElementById('lb-body');
+    body.innerHTML = '';
+
+    if (isSlides(item.extension)) {
+      const iframe = document.createElement('iframe');
+      iframe.src   = `https://docs.google.com/presentation/d/${item.id}/embed?start=false&loop=false`;
+      iframe.allowFullscreen = true;
+      body.appendChild(iframe);
+    } else if (isImg(item.extension)) {
+      const img = document.createElement('img');
+      img.src   = `https://drive.google.com/thumbnail?id=${item.id}&sz=w1920`;
+      img.alt   = client;
+      body.appendChild(img);
+    } else {
+      body.innerHTML = `<div style="padding:48px;text-align:center;color:#9CA3AF;font-size:13px">
+        Preview not available — use the buttons above to open the file.</div>`;
+    }
+
+    document.getElementById('lightbox-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('lb-body').innerHTML = '';
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     EVENTS
+  ═══════════════════════════════════════════════════════════════════ */
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+    activeTab = btn.dataset.section;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b===btn));
+    document.querySelectorAll('.section-panel').forEach(p => p.classList.toggle('active', p.id===`panel-${activeTab}`));
+    const f = applyFilters(getItems(activeTab));
+    const rc = document.getElementById('result-count');
+    if (rc) rc.textContent = t('count')(f.length);
+  }));
+
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => {
+    activeLang = btn.dataset.lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b===btn));
+    applyI18n();
+    renderAll();
+  }));
+
+  document.getElementById('search-input').addEventListener('input', e => { searchQ = e.target.value.trim(); renderSection(activeTab); });
+  document.getElementById('filter-module').addEventListener('change',   e => { filterMod = e.target.value; renderSection(activeTab); });
+  document.getElementById('filter-industry').addEventListener('change', e => { filterInd = e.target.value; renderSection(activeTab); });
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-overlay').addEventListener('click', e => { if(e.target===document.getElementById('lightbox-overlay')) closeLightbox(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+
+  /* ═══════════════════════════════════════════════════════════════════
+     LOAD DATA
+  ═══════════════════════════════════════════════════════════════════ */
+  async function loadData() {
+    const grid = document.getElementById('grid-CS');
+    if (grid) grid.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Cargando...</p></div>`;
+
+    try {
+      const res  = await fetch('data.json?v=' + Date.now());
+      const data = await res.json();
+      allData = {
+        benchmarks:   data.benchmarks   || [],
+        spotlights:   data.spotlights   || [],
+        case_studies: data.case_studies || [],
+      };
+      applyI18n();
+      renderAll();
+    } catch(err) {
+      console.error(err);
+      if (grid) grid.innerHTML = `<div class="empty-state">
+        <div class="empty-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg></div>
+        <h3>Error al cargar</h3><p>Intenta refrescar la página.</p></div>`;
+    }
+  }
+
   loadData();
-</script>
+  </script>
 </body>
 </html>
